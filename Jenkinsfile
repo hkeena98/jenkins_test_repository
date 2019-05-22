@@ -2,12 +2,24 @@
 //Jenkinsfile (Declarative Pipeline)
 
 pipeline {
-    //agent { docker { image 'maven:3.3.3' } }
     agent any
     stages {
-        stage('build') {
+        stage('Start') {
             steps {
-                sh 'mvn --version'
+                input('Do you wish to compile the program?')
+            }
+        }
+        stage('Compile') {
+            steps {
+                echo 'Compiling the code...'
+                sh 'javac JenkTest.java'
+                echo 'Code compiled...'
+            }
+        }
+        stage('Run') {
+            steps {
+                echo 'Running Java Code...'
+                sh 'java JenkTest'
             }
         }
     }
